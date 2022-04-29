@@ -1,3 +1,121 @@
+
+const paper = document.getElementById("paperButton");
+paper.addEventListener("click", ()=> comparison("paper"));
+const scissors = document.getElementById("scissorsButton");
+scissors.addEventListener("click", ()=> comparison("scissors"));
+const rock = document.getElementById("rockButton");
+rock.addEventListener("click", ()=> comparison("rock"));
+const computer = document.getElementById("computer");
+const user = document.getElementById("user");
+const result = document.getElementById("result");
+const huusPoint = document.getElementById("score")
+
+function getComputerChoice () {
+    const arr = ["paper", "scissors", "rock"];    
+    const computerPickGenerator = arr[Math.floor(Math.random() * arr.length)];
+    return computerPickGenerator;
+}
+// const userPoint= "Computer Loses";
+// const computerPoint= "Computer Wins";
+
+// for (let i=0; i<2000; i++) {    
+//     let computerPick = getComputerChoice();
+//     let playerOne = playerPick();
+//     let gameResult = comparison(playerOne,computerPick);
+//     endGame(gameResult);
+//     console.log(gameResult);
+//     console.log(computerPick);
+//     if (userScore === 5 || computerScore ===5) {
+//         break;
+//     }
+// }
+
+
+
+function comparison (userChoice) {
+    const computerChoice = getComputerChoice();
+    switch(computerChoice + userChoice) {
+        case "paperscissors":
+        case "rockpaper":
+        case "scissorsrock":
+            computer.textContent = "The computer chose " + computerChoice;
+            user.textContent = "You chose " + userChoice;
+            console.log("computerChoice:", computerChoice);
+            console.log("userChoice:", userChoice);
+            console.log("Computer Loses");
+            result.textContent = ("Computer Loses");
+            return("Computer Loses");
+    
+    }
+    switch(computerChoice + userChoice) {
+        case "scissorspaper":
+        case "paperrock":
+        case "rockscissors":
+            computer.textContent = "The computer chose " + computerChoice;
+            user.textContent = "You chose " + userChoice;
+            console.log("computerChoice:", computerChoice);
+            console.log("userChoice:", userChoice);
+            console.log("Computer Wins");
+            result.textContent = ("Computer Wins");
+            return("Computer Wins");
+    }
+    switch(computerChoice + userChoice) {
+        case "paperpaper":
+        case "rockrock":
+        case "scissorsscissors":
+            computer.textContent = "The computer chose " + computerChoice;
+            user.textContent = "You chose " + userChoice;
+            console.log("computerChoice:", computerChoice);
+            console.log("userChoice:", userChoice);
+            console.log("Draw");
+            result.textContent = ("Draw");
+            return("Draw");
+    }
+}
+
+function getScore () {
+    const userWins= "Computer Loses";
+    const computerWins= "Computer Wins";
+    const bothWin= "Draw";
+    let computerScore = 0;
+    let userScore = 0;
+    let drawScore = 0;
+    let final = comparison ();
+    if(final == bothWin) {
+        drawScore+=1;
+        return drawScore;
+    }
+    else if (final == userWins) {
+        userScore+=1;
+        return userScore;
+        // document.getElementById("playerScore").innerHTML = userScore;
+    }
+    else if (final == computerWins) {
+        computerScore+=1;
+        return computerScore;
+    }
+
+
+    
+}
+// var showMeTheMoney = getScore();
+document.getElementById("playerScore").innerHTML = getScore();
+
+// var showMeTheMoney = getScore();
+// document.getElementById("huusPoint").innerHTML = showMeTheMoney ;
+
+
+// let endGame = compareChoices();
+// console.log(endGame);
+// result.textContent = endGame;
+
+// function result (pick){
+// const showWinner = compareChoices (userChoice);
+// console.log("winner", showWinner);
+// result.textContent = "winner " + showWinner;
+// alert("winner " + showWinner);
+// }
+
 // The Game Logic
 
 // paper beats rock
@@ -22,58 +140,44 @@
     // c) html element to display computers wins-TODO
     // d) html element to display computers loses-TODO
 
+    // var call = compareChoices(userChoice);
 
-var PaperButton = document.getElementById("paperButton");
-PaperButton.addEventListener("click", theFunction);
-var ScissorsButton = document.getElementById("scissorsButton");
-ScissorsButton.addEventListener("click", theFunction);
-var RockButton = document.getElementById("rockButton");
-RockButton.addEventListener("click", theFunction);
-//I am using event.target.value to get value given to the button which is used to grab user pick
-    function doSomething (event) {
-        var pick = event.target.value;
-        return (pick);
-}
-//The picks are going to run through these conditions until one of then is met. If one is met the result will return to theFunction.
-function figureOutWhoWon (computerPickGenerator, userPick) {
-    if (computerPickGenerator == "rock" && userPick == "scissors")
-    return ("Computer Wins");
-    else if (computerPickGenerator == "rock" && userPick == "paper")
-    return ("Computer Loses");
-    else if (computerPickGenerator == "paper" && userPick == "scissors")
-    return ("Computer Loses");
-    else if (computerPickGenerator == "paper" && userPick == "rock")
-    return ("Computer Wins");
-    else if (computerPickGenerator == "scissors" && userPick == "paper")
-    return ("Computer Wins");
-    else if (computerPickGenerator == "scissors" && userPick == "rock")
-    return ("Computer Loses")
-} 
-function theFunction (event) {
-    console.log(event.target.value);
-    //Userpick is generated through a click event on buttons
-    var user = document.getElementById('user');
-    var userPick = doSomething (event);
-    user.innerHTML = ("USER PICKED " + userPick);
-    //Computer pick is triggered by click event but generated through math.random
-    var computer = document.getElementById('computer');
-    var arr = ["paper", "scissors", "rock"];    
-    var computerPickGenerator = arr[Math.floor(Math.random() * arr.length)];
-    computer.innerHTML = ("COMPUTER PICKED " + computerPickGenerator);
-    //This is where the comparison determins who wins
-    if (computerPickGenerator == userPick) {
-        alert ("Tie")
-    } else {
-    //The function figureOutWhoWon finds out who won incase it is not a tie
-    var result = figureOutWhoWon (computerPickGenerator, userPick);
-    alert (result);
-    } 
-    console.log();
-}
+// let endGame = finalScore(call);
+// document.write(endGame);
 
+// console.log(userScore);
+// function finalScore(call) {
+// var computerScore = 0;    
+// var userScore = 0;
+// var call = compareChoices();
+// if (call == "Computer Loses") {
+//     userScore += 1;
+// }
+// else if (call == "Computer Wins") {
+//     computerScore += 1;
+// }
+// else if (call == "Draw") {
+//     userScore +=0;
+// }
+// return computerScore;
 
+// }
+// var psr = endGame();
+// var computerScore = 0;
+// function endGame (gameResult){
+// if (gameResult === userPoint){
+//     userScore++;
+// } else if (gameResult === computerPoint) {
+//     computerScore++;
+// }
 
+// if (userScore === 5) {
+//     console.log(userPoint);
+//     return;
+// }
+// if (computerScore === 5) {
+//     console.log(computerPoint);
+//     return;
+// }
 
-//element.addEventListener(event, function, useCapture)
-
-//button.addEventListener("click", theFunction, ...)
+// }
